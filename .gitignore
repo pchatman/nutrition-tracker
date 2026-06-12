@@ -1,0 +1,43 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/*.iml
+target/
+.gradle/
+build/
+*.jar
+*.war
+*.ear
+
+# Frontend
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+node_modules/
+dist/
+ng build/
+.angular/
+.cache/
+
+# Environment and Security Files
+.env
+*.env
+*.log
+
+# IntelliJ (IDE and System Metadata)
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+backend/.postman/
+backend/postman/
+postman/
+.postman/
