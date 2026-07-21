@@ -22,7 +22,7 @@ services:
       start_period: 20s
     # Expose port 5432 to your host so you can connect with DBeaver/pgAdmin
     # Remove this block if you prefer the DB to be completely internal
-    ports:
+    ports:                    # Disabled for security reasons
       - "5432:5432"
 
   # ── Backend ──────────────────────────────────────────────
@@ -42,6 +42,7 @@ services:
       JWT_EXPIRATION:       ${JWT_EXPIRATION}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
     ports:
+#      - "8888:8888"          # access API at http://localhost:8888
       - "8080:8080"
     depends_on:
       db:
