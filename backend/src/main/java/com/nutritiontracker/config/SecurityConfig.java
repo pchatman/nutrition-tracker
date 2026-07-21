@@ -70,38 +70,57 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
+// public class SecurityConfig {
+
+//     private final JwtFilter jwtFilter;
+
+//     @Bean
+//     public PasswordEncoder passwordEncoder() {
+//         return new BCryptPasswordEncoder();
+//     }
+
+//     @Bean
+//     public AuthenticationManager authenticationManager(
+//             AuthenticationConfiguration config) throws Exception {
+//         return config.getAuthenticationManager();
+//     }
+
+//     @Bean
+//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         http
+//                 .csrf(csrf -> csrf.disable())
+//                 .cors(Customizer.withDefaults())
+//                 .sessionManagement(sm -> sm
+//                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                 .authorizeHttpRequests(auth -> auth
+//                         .requestMatchers("/api/auth/**").permitAll()
+//                         .requestMatchers("/api/foods/search").permitAll()
+//                         .anyRequest().authenticated())
+//                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+//         return http.build();
+//     }
+// }
+
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults())
-                .sessionManagement(sm -> sm
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/foods/search").permitAll()
-                        .anyRequest().authenticated())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        // ... rest of config
         return http.build();
     }
 }
+
 // allows localhost:4200
 //package com.nutritiontracker.config;
 //
