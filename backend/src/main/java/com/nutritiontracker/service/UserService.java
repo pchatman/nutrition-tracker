@@ -55,4 +55,17 @@ public class UserService implements UserDetailsService {
         String token = jwtUtil.generateToken(request.getUsername());
         return Map.of("token", token, "username", request.getUsername());
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+    }
+
+    public User updateCalorieGoal(String username, UpdateProfileRequest request) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setDailyCalorieGoal(request.getDailyCalorieGoal());
+        return userRepository.save(user);
+    }
 }
