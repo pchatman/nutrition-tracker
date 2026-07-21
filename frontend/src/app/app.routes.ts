@@ -21,5 +21,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/food-search/food-search.component')
         .then(m => m.FoodSearchComponent)
+  },
+  {
+    path: 'profile',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./profile/profile.component').then(m => m.ProfileComponent)
+      // import('./features/profile/profile.component')
+      //   .then(m => m.ProfileComponent)
   }
 ];
