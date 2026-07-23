@@ -1,0 +1,28 @@
+<div class="profile-container">
+  <h2>Your Profile</h2>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div *ngIf="!loading && profile">
+    <p><strong>Username:</strong> {{ profile.username }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+
+    <div class="form-group">
+      <label for="calorieGoal">Daily Calorie Goal</label>
+      <input
+        id="calorieGoal"
+        type="number"
+        min="500"
+        [(ngModel)]="calorieGoal"
+        name="calorieGoal"
+      />
+    </div>
+
+    <button (click)="saveGoal()" [disabled]="saving">
+      {{ saving ? 'Saving...' : 'Save Changes' }}
+    </button>
+
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </div>
+</div>
